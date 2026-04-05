@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/Java-25%2B-orange.svg)](https://www.oracle.com/java/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.moriline/UniDiffStatic.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.moriline/UniDiffStatic)
 [![Build Status](https://img.shields.io/badge/Build-Gradle-green.svg)](https://gradle.org/)
 
 A **zero-dependency** Java library for computing text diffs and applying patches using the **Myers greedy difference algorithm**. Produces standard **unified diff** format output — the same format as `git diff` and `diff -u`.
@@ -25,7 +26,41 @@ A **zero-dependency** Java library for computing text diffs and applying patches
 
 ### Add to Your Project
 
-Add the library to your Gradle or Maven project. See the [Installation Guide](install.md) for details.
+**Maven Central:** [io.github.moriline:UniDiffStatic:1.0.0](https://central.sonatype.com/artifact/io.github.moriline/UniDiffStatic) · [POM](https://repo1.maven.org/maven2/io/github/moriline/UniDiffStatic/1.0.0/UniDiffStatic-1.0.0.pom)
+
+#### Gradle (Kotlin DSL)
+
+```kotlin
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("io.github.moriline:UniDiffStatic:1.0.0")
+}
+```
+
+#### Gradle (Groovy)
+
+```groovy
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.github.moriline:UniDiffStatic:1.0.0'
+}
+```
+
+#### Maven
+
+```xml
+<dependency>
+    <groupId>io.github.moriline</groupId>
+    <artifactId>UniDiffStatic</artifactId>
+    <version>1.0.0</version>
+</dependency>
+```
 
 ### Basic Usage
 
