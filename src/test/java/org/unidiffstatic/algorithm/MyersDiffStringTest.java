@@ -135,7 +135,7 @@ class MyersDiffStringTest {
         try {
             String patched = UniDiffStatic.patch(source, diff);
             assertEquals(target, patched);
-        } catch (org.unidiffstatic.patch.PatchFailedException e) {
+        } catch (Exception e) {
             fail(e.getMessage());
         }
     }

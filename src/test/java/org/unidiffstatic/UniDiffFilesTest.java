@@ -62,7 +62,7 @@ public class UniDiffFilesTest {
         String patched;
         try {
             patched = UniDiffStatic.patch(baseText, patchText);
-        } catch (org.unidiffstatic.patch.PatchFailedException e) {
+        } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
             return;
         }
@@ -104,7 +104,7 @@ public class UniDiffFilesTest {
         try {
             String patched = UniDiffStatic.patch("", diffText);
             assertEquals("line1\nline2", patched.replace("\r\n", "\n"));
-        } catch (org.unidiffstatic.patch.PatchFailedException e) {
+        } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
         }
     }
@@ -158,7 +158,7 @@ public class UniDiffFilesTest {
         String patchedText;
         try {
             patchedText = UniDiffStatic.patch(origText, unifiedDiff);
-        } catch (org.unidiffstatic.patch.PatchFailedException e) {
+        } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
             return;
         }

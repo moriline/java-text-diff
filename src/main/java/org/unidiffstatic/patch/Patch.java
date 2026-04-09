@@ -26,7 +26,7 @@ public final class Patch<T> {
     /**
      * Applies the patch to the original list and returns the revised list.
      */
-    public List<T> applyTo(List<? extends T> target) throws PatchFailedException {
+    public List<T> applyTo(List<? extends T> target) throws Exception {
         List<T> result = new ArrayList<>(target);
         // Apply deltas in reverse order (by position) to preserve positions
         List<AbstractDelta<T>> sorted = getDeltas();

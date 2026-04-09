@@ -133,13 +133,13 @@ String original = UniDiffStatic.unpatch(revised, diff);
 ### `patch()` — Apply a Unified Diff
 
 ```java
-String patch(String original, String uniDiff) throws PatchFailedException
-String patch(String original, String uniDiff, String delimiter) throws PatchFailedException
+String patch(String original, String uniDiff) throws Exception
+String patch(String original, String uniDiff, String delimiter) throws Exception
 ```
 
 Applies the given unified diff to the original text.
 
-**Throws:** `PatchFailedException` if the patch cannot be applied.
+**Throws:** `Exception` if the patch cannot be applied.
 
 ### `unpatch()` — Reverse a Unified Diff
 
@@ -195,7 +195,6 @@ src/main/java/org/unidiffstatic/
 │   └── DiffAlgorithmListener.java  # Callback interface for algorithm events
 └── patch/
     ├── Patch.java              # Patch application engine
-    ├── PatchFailedException.java
     ├── Delta.java              # Sealed hierarchy: ChangeDelta, DeleteDelta, InsertDelta, EqualDelta
     ├── Chunk.java              # Represents a chunk of text in a delta
     └── AbstractDelta.java      # Base class for delta types

@@ -56,7 +56,7 @@ public class ComputeDifference {
                 assertEquals(revLines[i], patchLines[i]);
             }
             System.out.println("Round-trip verified successfully!");
-        } catch (org.unidiffstatic.patch.PatchFailedException e) {
+        } catch (Exception e) {
             fail(e.getMessage());
         }
     }

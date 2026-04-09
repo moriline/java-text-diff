@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 /**
  * Utility class for computing differences between sequences and applying patches.
+ * Required java 21+
  */
 public final class UniDiffStatic {
 
@@ -81,10 +82,10 @@ public final class UniDiffStatic {
      * @param original the original text
      * @param uniDiff  the unified diff string to apply
      * @return the patched text
-     * @throws org.unidiffstatic.patch.PatchFailedException if the patch cannot be applied
+     * @throws Exception if the patch cannot be applied
      */
     public static String patch(String original, String uniDiff)
-            throws org.unidiffstatic.patch.PatchFailedException {
+            throws Exception {
         return patch(original, uniDiff, defaultDelimiter);
     }
 
@@ -95,10 +96,10 @@ public final class UniDiffStatic {
      * @param uniDiff   the unified diff string to apply
      * @param delimiter the line delimiter used to split and join text
      * @return the patched text
-     * @throws org.unidiffstatic.patch.PatchFailedException if the patch cannot be applied
+     * @throws Exception if the patch cannot be applied
      */
     public static String patch(String original, String uniDiff, String delimiter)
-            throws org.unidiffstatic.patch.PatchFailedException {
+            throws Exception {
 
         List<String> originalLines = new ArrayList<>(
                 List.of(original.split(Pattern.quote(delimiter), -1)));

@@ -21,7 +21,7 @@ public class DiffRowGeneratorEqualitiesTest {
         try {
             String patched = UniDiffStatic.patch(text, diff);
             assertEquals(text, patched);
-        } catch (org.unidiffstatic.patch.PatchFailedException e) {
+        } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
         }
     }
@@ -40,7 +40,7 @@ public class DiffRowGeneratorEqualitiesTest {
         try {
             String patched = UniDiffStatic.patch(first, diff);
             assertEquals(second, patched);
-        } catch (org.unidiffstatic.patch.PatchFailedException e) {
+        } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
         }
     }
@@ -55,7 +55,7 @@ public class DiffRowGeneratorEqualitiesTest {
         try {
             String patched = UniDiffStatic.patch(text, diff);
             assertEquals(text, patched);
-        } catch (org.unidiffstatic.patch.PatchFailedException e) {
+        } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
         }
     }
