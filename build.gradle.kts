@@ -3,6 +3,8 @@ import java.time.Duration
 plugins {
     `java-library`
     `maven-publish`
+    signing
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 group = "io.github.moriline"
@@ -36,7 +38,7 @@ publishing {
             from(components["java"])
 
             pom {
-                name.set("UniDiffStatic")
+                name.set("JavaTextDiff")
                 description.set("Zero-dependency Java library for computing text diffs and applying patches using the Myers greedy difference algorithm")
                 url.set("https://github.com/moriline/java-text-diff")
 
@@ -62,5 +64,27 @@ publishing {
                 }
             }
         }
+    }
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+            username.set(project.findProperty("sonatypeUsername")?.toString() ?: "")
+            password.set(project.findProperty("sonatypePassword")?.toString() ?: "")
+            packageGroup.set("io.github.moriline")
+        }
+    }
+    connectTimeout.set(Duration.ofMinutes(3))
+    clientTimeout.set(Duration.ofMinutes(3))
+}
+
+signing {
+    val sonatypeUsername = project.findProperty("sonatypeUsername")?.toString()?.isNotBlank() == true
+    if (sonatypeUsername) {
+        useGpgCmd()
+        sign(publishing.publications["mavenJava"])
     }
 }
