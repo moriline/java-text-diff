@@ -1,7 +1,7 @@
 package org.unidiffstatic.patch;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,10 +20,10 @@ public class PatchWithMyerDiffWithLinearSpaceTest {
         String changeTest_from = "aaa\nbbb\nccc\nddd";
         String changeTest_to = "aaa\nbxb\ncxc\nddd";
 
-        String diff = UniDiffStatic.diff(changeTest_from, changeTest_to);
+        String diff = JavaTextDiff.diff(changeTest_from, changeTest_to);
         assertFalse(diff.isEmpty());
 
-        String patched = UniDiffStatic.patch(changeTest_from, diff);
+        String patched = JavaTextDiff.patch(changeTest_from, diff);
         assertEquals(changeTest_to, patched);
     }
 
@@ -32,11 +32,11 @@ public class PatchWithMyerDiffWithLinearSpaceTest {
         String changeTest_from = "aaa\nbbb\nccc\nddd";
         String changeTest_to = "aaa\nbxb\ncxc\nddd";
 
-        String diff = UniDiffStatic.diff(changeTest_from, changeTest_to);
+        String diff = JavaTextDiff.diff(changeTest_from, changeTest_to);
 
         // Corrupt the original — our patchStatic doesn't verify content
         String corrupted = "aaa\nbbb\nCDC\nddd";
-        String patched = UniDiffStatic.patch(corrupted, diff);
+        String patched = JavaTextDiff.patch(corrupted, diff);
         assertNotNull(patched);
     }
 }

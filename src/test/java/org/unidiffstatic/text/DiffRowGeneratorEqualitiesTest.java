@@ -1,7 +1,7 @@
 package org.unidiffstatic.text;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,12 +14,12 @@ public class DiffRowGeneratorEqualitiesTest {
     @Test
     public void testDefaultEqualityProcessingLeavesTextUnchanged() {
         String text = "hello world";
-        String diff = UniDiffStatic.diff(text, text);
+        String diff = JavaTextDiff.diff(text, text);
 
-        assertEquals(UniDiffStatic.identicalResult, diff);
+        assertEquals(JavaTextDiff.identicalResult, diff);
 
         try {
-            String patched = UniDiffStatic.patch(text, diff);
+            String patched = JavaTextDiff.patch(text, diff);
             assertEquals(text, patched);
         } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
@@ -33,12 +33,12 @@ public class DiffRowGeneratorEqualitiesTest {
         String second = "hello world";
 
         // diffStatic will detect difference (case-sensitive)
-        String diff = UniDiffStatic.diff(first, second);
+        String diff = JavaTextDiff.diff(first, second);
         assertFalse(diff.isEmpty());
 
         // Round-trip should work
         try {
-            String patched = UniDiffStatic.patch(first, diff);
+            String patched = JavaTextDiff.patch(first, diff);
             assertEquals(second, patched);
         } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
@@ -48,12 +48,12 @@ public class DiffRowGeneratorEqualitiesTest {
     @Test
     public void testHtmlEscapingEqualitiesWorksWithDefaultNormalizer() {
         String text = "hello <world>";
-        String diff = UniDiffStatic.diff(text, text);
+        String diff = JavaTextDiff.diff(text, text);
 
-        assertEquals(UniDiffStatic.identicalResult, diff);
+        assertEquals(JavaTextDiff.identicalResult, diff);
 
         try {
-            String patched = UniDiffStatic.patch(text, diff);
+            String patched = JavaTextDiff.patch(text, diff);
             assertEquals(text, patched);
         } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
@@ -65,10 +65,10 @@ public class DiffRowGeneratorEqualitiesTest {
         String first = "hello world";
         String second = "hello there";
 
-        String diff = UniDiffStatic.diff(first, second);
+        String diff = JavaTextDiff.diff(first, second);
         assertFalse(diff.isEmpty());
 
-        String patched = UniDiffStatic.patch(first, diff);
+        String patched = JavaTextDiff.patch(first, diff);
         assertEquals(second, patched);
     }
 }

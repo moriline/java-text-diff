@@ -16,10 +16,10 @@ class UniDiffStaticWindowsPatchTest {
         String source = "hello" + DL + "world" + DL + "foo";
         String target = "hello" + DL + "earth" + DL + "foo";
 
-        String diff = UniDiffStatic.diff(source, target, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
         assertFalse(diff.isEmpty());
 
-        String patched = UniDiffStatic.patch(source, diff, DL);
+        String patched = JavaTextDiff.patch(source, diff, DL);
 
         assertEquals(target, patched);
     }
@@ -29,8 +29,8 @@ class UniDiffStaticWindowsPatchTest {
         String source = "aaa" + DL + "ccc";
         String target = "aaa" + DL + "bbb" + DL + "ccc";
 
-        String diff = UniDiffStatic.diff(source, target, DL);
-        String patched = UniDiffStatic.patch(source, diff, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
+        String patched = JavaTextDiff.patch(source, diff, DL);
 
         assertEquals(target, patched);
     }
@@ -40,8 +40,8 @@ class UniDiffStaticWindowsPatchTest {
         String source = "aaa" + DL + "bbb" + DL + "ccc";
         String target = "aaa" + DL + "ccc";
 
-        String diff = UniDiffStatic.diff(source, target, DL);
-        String patched = UniDiffStatic.patch(source, diff, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
+        String patched = JavaTextDiff.patch(source, diff, DL);
 
         assertEquals(target, patched);
     }
@@ -51,8 +51,8 @@ class UniDiffStaticWindowsPatchTest {
         String source = "The" + DL + "dog" + DL + "is" + DL + "brown";
         String target = "The" + DL + "fox" + DL + "is" + DL + "down";
 
-        String diff = UniDiffStatic.diff(source, target, DL);
-        String patched = UniDiffStatic.patch(source, diff, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
+        String patched = JavaTextDiff.patch(source, diff, DL);
 
         assertEquals(target, patched);
     }
@@ -61,10 +61,10 @@ class UniDiffStaticWindowsPatchTest {
     void testPatchNoChangesReturnsOriginal() throws Exception {
         String text = "hello" + DL + "world";
 
-        String diff = UniDiffStatic.diff(text, text, DL);
+        String diff = JavaTextDiff.diff(text, text, DL);
 
         assertTrue(diff.isEmpty());
-        String patched = UniDiffStatic.patch(text, diff, DL);
+        String patched = JavaTextDiff.patch(text, diff, DL);
 
         assertEquals(text, patched);
     }
@@ -74,8 +74,8 @@ class UniDiffStaticWindowsPatchTest {
         String source = "";
         String target = "hello" + DL + "world";
 
-        String diff = UniDiffStatic.diff(source, target, DL);
-        String patched = UniDiffStatic.patch(source, diff, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
+        String patched = JavaTextDiff.patch(source, diff, DL);
 
         assertEquals(target, patched);
     }
@@ -85,8 +85,8 @@ class UniDiffStaticWindowsPatchTest {
         String source = "hello" + DL + "world";
         String target = "";
 
-        String diff = UniDiffStatic.diff(source, target, DL);
-        String patched = UniDiffStatic.patch(source, diff, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
+        String patched = JavaTextDiff.patch(source, diff, DL);
 
         assertEquals(target, patched);
     }
@@ -104,10 +104,10 @@ class UniDiffStaticWindowsPatchTest {
                 .replace("line 50" + DL, "MODIFIED 50" + DL)
                 .replace("line 90" + DL, "MODIFIED 90" + DL);
 
-        String diff = UniDiffStatic.diff(source, target, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
         assertFalse(diff.isEmpty());
 
-        String patched = UniDiffStatic.patch(source, diff, DL);
+        String patched = JavaTextDiff.patch(source, diff, DL);
 
         assertEquals(target, patched);
     }
@@ -117,10 +117,10 @@ class UniDiffStaticWindowsPatchTest {
         String source = "aaa;bbb;ccc";
         String target = "aaa;xxx;ccc";
 
-        String diff = UniDiffStatic.diff(source, target, ";");
+        String diff = JavaTextDiff.diff(source, target, ";");
         assertFalse(diff.isEmpty());
 
-        String patched = UniDiffStatic.patch(source, diff, ";");
+        String patched = JavaTextDiff.patch(source, diff, ";");
 
         assertEquals(target, patched);
     }
@@ -130,8 +130,8 @@ class UniDiffStaticWindowsPatchTest {
         String source = "one|two|three";
         String target = "one|two|updated";
 
-        String diff = UniDiffStatic.diff(source, target, "|");
-        String patched = UniDiffStatic.patch(source, diff, "|");
+        String diff = JavaTextDiff.diff(source, target, "|");
+        String patched = JavaTextDiff.patch(source, diff, "|");
 
         assertEquals(target, patched);
     }
@@ -141,8 +141,8 @@ class UniDiffStaticWindowsPatchTest {
         String source = "a;c";
         String target = "a;b;c";
 
-        String diff = UniDiffStatic.diff(source, target, ";");
-        String patched = UniDiffStatic.patch(source, diff, ";");
+        String diff = JavaTextDiff.diff(source, target, ";");
+        String patched = JavaTextDiff.patch(source, diff, ";");
 
         assertEquals(target, patched);
     }
@@ -154,10 +154,10 @@ class UniDiffStaticWindowsPatchTest {
         String source = "hello" + DL + "world" + DL + "foo";
         String target = "hello" + DL + "earth" + DL + "foo";
 
-        String diff = UniDiffStatic.diff(source, target, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
         assertFalse(diff.isEmpty());
 
-        String restored = UniDiffStatic.unpatch(target, diff, DL);
+        String restored = JavaTextDiff.unpatch(target, diff, DL);
         assertEquals(source, restored);
     }
 
@@ -166,8 +166,8 @@ class UniDiffStaticWindowsPatchTest {
         String source = "aaa" + DL + "bbb" + DL + "ccc";
         String target = "aaa" + DL + "ccc";
 
-        String diff = UniDiffStatic.diff(source, target, DL);
-        String restored = UniDiffStatic.unpatch(target, diff, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
+        String restored = JavaTextDiff.unpatch(target, diff, DL);
 
         assertEquals(source, restored);
     }
@@ -177,8 +177,8 @@ class UniDiffStaticWindowsPatchTest {
         String source = "The" + DL + "dog" + DL + "is" + DL + "brown";
         String target = "The" + DL + "fox" + DL + "is" + DL + "down";
 
-        String diff = UniDiffStatic.diff(source, target, DL);
-        String restored = UniDiffStatic.unpatch(target, diff, DL);
+        String diff = JavaTextDiff.diff(source, target, DL);
+        String restored = JavaTextDiff.unpatch(target, diff, DL);
 
         assertEquals(source, restored);
     }
@@ -188,9 +188,9 @@ class UniDiffStaticWindowsPatchTest {
         String source = "aaa;bbb;ccc";
         String target = "aaa;xxx;ccc";
 
-        String diff = UniDiffStatic.diff(source, target, ";");
-        String patched = UniDiffStatic.patch(source, diff, ";");
-        String restored = UniDiffStatic.unpatch(patched, diff, ";");
+        String diff = JavaTextDiff.diff(source, target, ";");
+        String patched = JavaTextDiff.patch(source, diff, ";");
+        String restored = JavaTextDiff.unpatch(patched, diff, ";");
 
         assertEquals(source, restored);
     }
@@ -200,9 +200,9 @@ class UniDiffStaticWindowsPatchTest {
         String source = "one|two|three";
         String target = "one|two|updated";
 
-        String diff = UniDiffStatic.diff(source, target, "|");
-        String patched = UniDiffStatic.patch(source, diff, "|");
-        String restored = UniDiffStatic.unpatch(patched, diff, "|");
+        String diff = JavaTextDiff.diff(source, target, "|");
+        String patched = JavaTextDiff.patch(source, diff, "|");
+        String restored = JavaTextDiff.unpatch(patched, diff, "|");
 
         assertEquals(source, restored);
     }

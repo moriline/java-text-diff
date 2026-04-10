@@ -1,7 +1,7 @@
 package org.unidiffstatic.algorithm;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,14 +14,14 @@ class MyersDiffStringTest {
 
     @Test
     void testComputeDiffIdenticalStringsReturnsEmptyDiff() {
-        String result = UniDiffStatic.diff("abc", "abc");
-        assertEquals(UniDiffStatic.identicalResult, result);
+        String result = JavaTextDiff.diff("abc", "abc");
+        assertEquals(JavaTextDiff.identicalResult, result);
     }
 
     @Test
     void testComputeDiffEmptyStringsReturnsEmptyDiff() {
-        String result = UniDiffStatic.diff("", "");
-        assertEquals(UniDiffStatic.identicalResult, result);
+        String result = JavaTextDiff.diff("", "");
+        assertEquals(JavaTextDiff.identicalResult, result);
     }
 
     @Test
@@ -29,8 +29,8 @@ class MyersDiffStringTest {
         String source = "ac";
         String target = "abc";
 
-        String diff = UniDiffStatic.diff(source, target);
-        String patched = UniDiffStatic.patch(source, diff);
+        String diff = JavaTextDiff.diff(source, target);
+        String patched = JavaTextDiff.patch(source, diff);
 
         assertEquals(target, patched);
     }
@@ -40,8 +40,8 @@ class MyersDiffStringTest {
         String source = "abc";
         String target = "ac";
 
-        String diff = UniDiffStatic.diff(source, target);
-        String patched = UniDiffStatic.patch(source, diff);
+        String diff = JavaTextDiff.diff(source, target);
+        String patched = JavaTextDiff.patch(source, diff);
 
         assertEquals(target, patched);
     }
@@ -51,8 +51,8 @@ class MyersDiffStringTest {
         String source = "abc";
         String target = "adc";
 
-        String diff = UniDiffStatic.diff(source, target);
-        String patched = UniDiffStatic.patch(source, diff);
+        String diff = JavaTextDiff.diff(source, target);
+        String patched = JavaTextDiff.patch(source, diff);
 
         assertEquals(target, patched);
     }
@@ -62,8 +62,8 @@ class MyersDiffStringTest {
         String source = "";
         String target = "hello";
 
-        String diff = UniDiffStatic.diff(source, target);
-        String patched = UniDiffStatic.patch(source, diff);
+        String diff = JavaTextDiff.diff(source, target);
+        String patched = JavaTextDiff.patch(source, diff);
 
         assertEquals(target, patched);
     }
@@ -73,8 +73,8 @@ class MyersDiffStringTest {
         String source = "hello";
         String target = "";
 
-        String diff = UniDiffStatic.diff(source, target);
-        String patched = UniDiffStatic.patch(source, diff);
+        String diff = JavaTextDiff.diff(source, target);
+        String patched = JavaTextDiff.patch(source, diff);
 
         assertEquals(target, patched);
     }
@@ -85,8 +85,8 @@ class MyersDiffStringTest {
         String source = "ABCABBA";
         String target = "CBABAC";
 
-        String diff = UniDiffStatic.diff(source, target);
-        String patched = UniDiffStatic.patch(source, diff);
+        String diff = JavaTextDiff.diff(source, target);
+        String patched = JavaTextDiff.patch(source, diff);
 
         assertEquals(target, patched);
     }
@@ -96,16 +96,16 @@ class MyersDiffStringTest {
         String source = "es";
         String target = "fest";
 
-        String diff = UniDiffStatic.diff(source, target);
-        String patched = UniDiffStatic.patch(source, diff);
+        String diff = JavaTextDiff.diff(source, target);
+        String patched = JavaTextDiff.patch(source, diff);
 
         assertEquals(target, patched);
     }
 
     @Test
     void testComputeUnifiedDiffIdenticalReturnsEmpty() {
-        String result = UniDiffStatic.diff("hello", "hello");
-        assertEquals(UniDiffStatic.identicalResult, result);
+        String result = JavaTextDiff.diff("hello", "hello");
+        assertEquals(JavaTextDiff.identicalResult, result);
     }
 
     @Test
@@ -113,7 +113,7 @@ class MyersDiffStringTest {
         String source = "abc\nxyz";
         String target = "adc\nxyz";
 
-        String result = UniDiffStatic.diff(source, target, "old", "new", 3);
+        String result = JavaTextDiff.diff(source, target, "old", "new", 3);
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("--- old"));
@@ -129,11 +129,11 @@ class MyersDiffStringTest {
         String source = "abc";
         String target = "adc";
 
-        String diff = UniDiffStatic.diff(source, target);
+        String diff = JavaTextDiff.diff(source, target);
         assertFalse(diff.isEmpty());
 
         try {
-            String patched = UniDiffStatic.patch(source, diff);
+            String patched = JavaTextDiff.patch(source, diff);
             assertEquals(target, patched);
         } catch (Exception e) {
             fail(e.getMessage());

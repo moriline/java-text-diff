@@ -1,7 +1,7 @@
 package org.unidiffstatic.examples;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,7 +30,7 @@ public class OriginalAndDiffTest {
         String origText = fileToText(MOCK_FOLDER + "original.txt");
         String revText = fileToText(MOCK_FOLDER + "revised.txt");
 
-        String diff = UniDiffStatic.diff(origText, revText, "original.txt", "revised.txt", 10);
+        String diff = JavaTextDiff.diff(origText, revText, "original.txt", "revised.txt", 10);
         System.out.println("=== Original and Diff ===");
         System.out.println(diff);
 
@@ -47,7 +47,7 @@ public class OriginalAndDiffTest {
         String origText = fileToText(MOCK_FOLDER + "issue_170_original.txt");
         String revText = fileToText(MOCK_FOLDER + "issue_170_revised.txt");
 
-        String diff = UniDiffStatic.diff(origText, revText, "issue_170_original.txt", "issue_170_revised.txt", 10);
+        String diff = JavaTextDiff.diff(origText, revText, "issue_170_original.txt", "issue_170_revised.txt", 10);
         System.out.println("=== First Line Change Diff ===");
         System.out.println(diff);
 
@@ -64,8 +64,8 @@ public class OriginalAndDiffTest {
         String origText = fileToText(MOCK_FOLDER + "original.txt");
         String revText = fileToText(MOCK_FOLDER + "revised.txt");
 
-        String diff = UniDiffStatic.diff(origText, revText, "original.txt", "revised.txt", 10);
-        String patched = UniDiffStatic.patch(origText, diff);
+        String diff = JavaTextDiff.diff(origText, revText, "original.txt", "revised.txt", 10);
+        String patched = JavaTextDiff.patch(origText, diff);
 
         // Normalize trailing newlines
         String[] revLines = revText.split("\n", -1);

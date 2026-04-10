@@ -1,7 +1,7 @@
 package org.unidiffstatic.patch;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,11 +20,11 @@ class ChunkTest {
         String revised = "prefix  es  suffix";
 
         // diff should detect the change
-        String diff = UniDiffStatic.diff(original, revised);
+        String diff = JavaTextDiff.diff(original, revised);
         assertFalse(diff.isEmpty());
 
         // patching original with diff should produce revised
-        String patched = UniDiffStatic.patch(original, diff);
+        String patched = JavaTextDiff.patch(original, diff);
         assertEquals(revised, patched);
     }
 
@@ -34,8 +34,8 @@ class ChunkTest {
         String original = "short test suffix";
         String revised = "prefix test suffix";
 
-        String diff = UniDiffStatic.diff(original, revised);
-        String patched = UniDiffStatic.patch(original, diff);
+        String diff = JavaTextDiff.diff(original, revised);
+        String patched = JavaTextDiff.patch(original, diff);
 
         assertEquals(revised, patched);
     }
@@ -48,11 +48,11 @@ class ChunkTest {
         String original = "prefix test suffix";
         String revised = "prefix test suffix";
 
-        String diff = UniDiffStatic.diff(original, revised);
-        assertEquals(UniDiffStatic.identicalResult, diff);
+        String diff = JavaTextDiff.diff(original, revised);
+        assertEquals(JavaTextDiff.identicalResult, diff);
 
         // patchStatic with empty diff returns original
-        String patched = UniDiffStatic.patch(original, diff);
+        String patched = JavaTextDiff.patch(original, diff);
         assertEquals(original, patched);
     }
 
@@ -62,8 +62,8 @@ class ChunkTest {
         String original = "prefix      suffix";
         String revised = "prefix test suffix";
 
-        String diff = UniDiffStatic.diff(original, revised);
-        String patched = UniDiffStatic.patch(original, diff);
+        String diff = JavaTextDiff.diff(original, revised);
+        String patched = JavaTextDiff.patch(original, diff);
 
         assertEquals(revised, patched);
     }
@@ -75,11 +75,11 @@ class ChunkTest {
         String original = "aaa\nbbb\nccc";
         String revised = "aaa\nxxx\nccc";
 
-        String diff = UniDiffStatic.diff(original, revised);
+        String diff = JavaTextDiff.diff(original, revised);
 
         // Corrupt original so content won't match
         String corrupted = "aaa\nYYY\nccc";
-        String patched = UniDiffStatic.patch(corrupted, diff);
+        String patched = JavaTextDiff.patch(corrupted, diff);
 
         // Our implementation applies by position, not content verification
         assertNotNull(patched);

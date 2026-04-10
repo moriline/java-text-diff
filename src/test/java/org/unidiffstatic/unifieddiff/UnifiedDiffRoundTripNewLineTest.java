@@ -1,7 +1,7 @@
 package org.unidiffstatic.unifieddiff;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,13 +19,13 @@ public class UnifiedDiffRoundTripNewLineTest {
         String afterContent = "rootProject.name = \"sample-repo\"";
 
         // diffStatic should produce a unified diff
-        String diff = UniDiffStatic.diff(beforeContent, afterContent);
+        String diff = JavaTextDiff.diff(beforeContent, afterContent);
 
         // Identical content should produce empty diff
-        assertEquals(UniDiffStatic.identicalResult, diff);
+        assertEquals(JavaTextDiff.identicalResult, diff);
 
         // patchStatic with empty diff should return original
-        String patched = UniDiffStatic.patch(beforeContent, diff);
+        String patched = JavaTextDiff.patch(beforeContent, diff);
         assertEquals(afterContent, patched);
     }
 
@@ -34,16 +34,16 @@ public class UnifiedDiffRoundTripNewLineTest {
         String beforeContent = "rootProject.name = \"sample-repo\"";
         String afterContent = "rootProject.name = \"sample-repo\"\n";
 
-        String diff = UniDiffStatic.diff(beforeContent, afterContent, "a", "b", 10);
+        String diff = JavaTextDiff.diff(beforeContent, afterContent, "a", "b", 10);
         // Empty diff when only trailing newline differs (both have same lines after split)
-        if (diff.isEmpty() || UniDiffStatic.identicalResult.equals(diff)) {
+        if (diff.isEmpty() || JavaTextDiff.identicalResult.equals(diff)) {
             // patchStatic with empty diff returns original
-            String patched = UniDiffStatic.patch(beforeContent, diff);
+            String patched = JavaTextDiff.patch(beforeContent, diff);
             assertEquals(beforeContent, patched);
             return;
         }
 
-        String patched = UniDiffStatic.patch(beforeContent, diff);
+        String patched = JavaTextDiff.patch(beforeContent, diff);
         // AfterContent has trailing newline which becomes an empty line after split
         String[] afterLines = afterContent.split("\n", -1);
         String[] patchLines = patched.split("\n", -1);

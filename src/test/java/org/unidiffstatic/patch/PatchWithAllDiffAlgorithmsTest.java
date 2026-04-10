@@ -1,7 +1,7 @@
 package org.unidiffstatic.patch;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,8 +19,8 @@ public class PatchWithAllDiffAlgorithmsTest {
         String insertTest_from = "hhh";
         String insertTest_to = "hhh\njjj\nkkk\nlll";
 
-        String diff = UniDiffStatic.diff(insertTest_from, insertTest_to);
-        String patched = UniDiffStatic.patch(insertTest_from, diff);
+        String diff = JavaTextDiff.diff(insertTest_from, insertTest_to);
+        String patched = JavaTextDiff.patch(insertTest_from, diff);
 
         assertEquals(insertTest_to, patched);
     }
@@ -30,8 +30,8 @@ public class PatchWithAllDiffAlgorithmsTest {
         String deleteTest_from = "ddd\nfff\nggg\nhhh";
         String deleteTest_to = "ggg";
 
-        String diff = UniDiffStatic.diff(deleteTest_from, deleteTest_to);
-        String patched = UniDiffStatic.patch(deleteTest_from, diff);
+        String diff = JavaTextDiff.diff(deleteTest_from, deleteTest_to);
+        String patched = JavaTextDiff.patch(deleteTest_from, diff);
 
         assertEquals(deleteTest_to, patched);
     }
@@ -41,8 +41,8 @@ public class PatchWithAllDiffAlgorithmsTest {
         String changeTest_from = "aaa\nbbb\nccc\nddd";
         String changeTest_to = "aaa\nbxb\ncxc\nddd";
 
-        String diff = UniDiffStatic.diff(changeTest_from, changeTest_to);
-        String patched = UniDiffStatic.patch(changeTest_from, diff);
+        String diff = JavaTextDiff.diff(changeTest_from, changeTest_to);
+        String patched = JavaTextDiff.patch(changeTest_from, diff);
 
         assertEquals(changeTest_to, patched);
     }

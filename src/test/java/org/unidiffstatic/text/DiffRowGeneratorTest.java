@@ -1,7 +1,7 @@
 package org.unidiffstatic.text;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,7 +39,7 @@ public class DiffRowGeneratorTest {
     public void testGeneratorInlineDiff() throws Exception {
         String first = "anything \n \nother";
         String second = "anything\n\nother";
-        String diff = UniDiffStatic.diff(first, second);
+        String diff = JavaTextDiff.diff(first, second);
         assertFalse(diff.isEmpty());
         assertTrue(diff.contains("--- original"));
         assertTrue(diff.contains("+++ revised"));
@@ -57,7 +57,7 @@ public class DiffRowGeneratorTest {
     public void testGeneratorWithWordWrap() throws Exception {
         String first = "anything \n \nother";
         String second = "anything\n\nother";
-        String diff = UniDiffStatic.diff(first, second, "a", "b", 1);
+        String diff = JavaTextDiff.diff(first, second, "a", "b", 1);
         assertFalse(diff.isEmpty());
         assertTrue(diff.contains("@@"));
     }
@@ -111,7 +111,7 @@ public class DiffRowGeneratorTest {
     public void testGeneratorUnchanged() throws Exception {
         String first = "anything \n \nother";
         String second = "anything\n\nother";
-        String diff = UniDiffStatic.diff(first, second, "a", "b", 1);
+        String diff = JavaTextDiff.diff(first, second, "a", "b", 1);
         assertTrue(diff.contains("@@"));
     }
 
@@ -225,16 +225,16 @@ public class DiffRowGeneratorTest {
     }
 
     private void verifyRoundTrip(String first, String second) throws Exception {
-        String diff = UniDiffStatic.diff(first, second);
+        String diff = JavaTextDiff.diff(first, second);
 
-        if (UniDiffStatic.identicalResult.equals(diff)) {
+        if (JavaTextDiff.identicalResult.equals(diff)) {
             if (!first.equals(second)) {
                 fail("diffStatic returned empty for different texts");
             }
             return;
         }
 
-        String patched = UniDiffStatic.patch(first, diff);
+        String patched = JavaTextDiff.patch(first, diff);
 
         String[] secondLines = second.split("\n", -1);
         String[] patchedLines = patched.split("\n", -1);

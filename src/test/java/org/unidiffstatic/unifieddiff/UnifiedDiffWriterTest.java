@@ -1,7 +1,7 @@
 package org.unidiffstatic.unifieddiff;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,7 +16,7 @@ public class UnifiedDiffWriterTest {
         String original = "hello\nworld\nfoo";
         String revised = "hello\nbar\nfoo";
 
-        String unifiedDiff = UniDiffStatic.diff(original, revised, "original.txt", "revised.txt", 5);
+        String unifiedDiff = JavaTextDiff.diff(original, revised, "original.txt", "revised.txt", 5);
         assertNotNull(unifiedDiff);
         assertFalse(unifiedDiff.isEmpty());
         assertTrue(unifiedDiff.contains("--- original.txt"));
@@ -29,7 +29,7 @@ public class UnifiedDiffWriterTest {
      */
     @Test
     public void testWriteWithNewFile() {
-        String unifiedDiff = UniDiffStatic.diff("", "line1\nline2", null, "revised", 5);
+        String unifiedDiff = JavaTextDiff.diff("", "line1\nline2", null, "revised", 5);
 
         String[] lines = unifiedDiff.split("\n");
         assertEquals("--- /dev/null", lines[0]);

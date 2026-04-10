@@ -1,6 +1,7 @@
 package org.unidiffstatic.text;
 
 import org.junit.jupiter.api.Test;
+import org.unidiffstatic.JavaTextDiff;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,10 +18,10 @@ public class StringUtilsTest {
     @Test
     public void testHtmlEntites() throws Exception {
         String input = "<test>";
-        String diff = org.unidiffstatic.UniDiffStatic.diff(input, "<test>");
+        String diff = JavaTextDiff.diff(input, "<test>");
 
         // Empty diff for identical content
-        assertEquals(org.unidiffstatic.UniDiffStatic.identicalResult, diff);
+        assertEquals(JavaTextDiff.identicalResult, diff);
     }
 
     /**
@@ -35,8 +36,8 @@ public class StringUtilsTest {
         assertEquals("    test", normalized);
 
         // Verify round-trip with tab content
-        String diff = org.unidiffstatic.UniDiffStatic.diff("\ttest", "\ttest");
-        assertEquals(org.unidiffstatic.UniDiffStatic.identicalResult, diff);
+        String diff = JavaTextDiff.diff("\ttest", "\ttest");
+        assertEquals(JavaTextDiff.identicalResult, diff);
     }
 
     /**
@@ -49,12 +50,12 @@ public class StringUtilsTest {
         String withSurrogate = ".\uD800\uDC01.";
 
         // diffStatic should handle it without issues
-        String diff = org.unidiffstatic.UniDiffStatic.diff(
+        String diff = JavaTextDiff.diff(
                 withSurrogate, ".\uD800\uDC01.");
-        assertEquals(org.unidiffstatic.UniDiffStatic.identicalResult, diff);
+        assertEquals(JavaTextDiff.identicalResult, diff);
 
         // Different surrogate content
-        String diff2 = org.unidiffstatic.UniDiffStatic.diff(
+        String diff2 = JavaTextDiff.diff(
                 withSurrogate, "changed");
         assertFalse(diff2.isEmpty());
     }
@@ -66,7 +67,7 @@ public class StringUtilsTest {
     @Test
     public void testWrapTextStringIntZero() {
         // Our API doesn't have wrap functionality, but we test empty string handling
-        String diff = org.unidiffstatic.UniDiffStatic.diff("", "test");
+        String diff = JavaTextDiff.diff("", "test");
         assertFalse(diff.isEmpty());
         assertTrue(diff.contains("+test"));
     }

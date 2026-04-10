@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * Utility class for computing differences between sequences and applying patches.
  * Required java 21+
  */
-public final class UniDiffStatic {
+public final class JavaTextDiff {
 
     /**
      * Default line delimiter used for splitting and joining text.

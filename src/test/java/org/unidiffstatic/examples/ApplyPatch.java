@@ -1,7 +1,7 @@
 package org.unidiffstatic.examples;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,7 +34,7 @@ public class ApplyPatch {
         System.out.println(patchText.substring(0, Math.min(500, patchText.length())));
 
         // Then apply the patch to the original text using String-based API
-        String result = UniDiffStatic.patch(original, patchText);
+        String result = JavaTextDiff.patch(original, patchText);
 
         System.out.println("=== Patched Result (first 500 chars) ===");
         System.out.println(result.substring(0, Math.min(500, result.length())));
@@ -51,7 +51,7 @@ public class ApplyPatch {
         String original = fileToText(MOCK_FOLDER + "issue10_base.txt");
         String patchText = fileToText(MOCK_FOLDER + "issue10_patch.txt");
 
-        String result = UniDiffStatic.patch(original, patchText);
+        String result = JavaTextDiff.patch(original, patchText);
         assertNotNull(result, "patchStatic should produce output");
         assertFalse(result.isEmpty(), "patched result should not be empty");
     }

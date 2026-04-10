@@ -46,7 +46,7 @@ public class UniDiffFilesTest {
 
     @Test
     public void testGenerateUnifiedDiffWithoutAnyDeltas() {
-        String unifiedDiffTxt = UniDiffStatic.diff("abc", "abc2", "abc1", "abc2", 0);
+        String unifiedDiffTxt = JavaTextDiff.diff("abc", "abc2", "abc1", "abc2", 0);
 
         assertAll("unified diff header",
                 () -> assertTrue(unifiedDiffTxt.contains("--- abc1"), "original filename should be abc1"),
@@ -61,7 +61,7 @@ public class UniDiffFilesTest {
 
         String patched;
         try {
-            patched = UniDiffStatic.patch(baseText, patchText);
+            patched = JavaTextDiff.patch(baseText, patchText);
         } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
             return;
@@ -88,21 +88,21 @@ public class UniDiffFilesTest {
         String original = "test line1\ntest line2\ntest line 4\ntest line 5";
         String revised = "test line1\ntest line2\n@@ -2,6 +2,7 @@\ntest line 4\ntest line 5";
 
-        String diffText = UniDiffStatic.diff(original, revised, "original", "revised", 10);
-        String patched = UniDiffStatic.patch(original, diffText);
+        String diffText = JavaTextDiff.diff(original, revised, "original", "revised", 10);
+        String patched = JavaTextDiff.patch(original, diffText);
 
         assertEquals(revised, patched);
     }
 
     @Test
     public void testNewFileCreation() {
-        String diffText = UniDiffStatic.diff("", "line1\nline2", null, "revised", 10);
+        String diffText = JavaTextDiff.diff("", "line1\nline2", null, "revised", 10);
 
         assertTrue(diffText.contains("--- /dev/null"), "null file indicator for original");
         assertTrue(diffText.contains("+++ revised"), "revised filename");
 
         try {
-            String patched = UniDiffStatic.patch("", diffText);
+            String patched = JavaTextDiff.patch("", diffText);
             assertEquals("line1\nline2", patched.replace("\r\n", "\n"));
         } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
@@ -119,7 +119,7 @@ public class UniDiffFilesTest {
         }
         String corruptedText = String.join("\n", baseLines);
 
-        String patched = UniDiffStatic.patch(corruptedText, patchText);
+        String patched = JavaTextDiff.patch(corruptedText, patchText);
         assertNotNull(patched, "patchStatic should produce output even with corrupted input");
     }
 
@@ -129,12 +129,12 @@ public class UniDiffFilesTest {
         String revised = fileToText(MOCK_FOLDER + "issue_189_insert_revised.txt");
 
         // Verify round-trip using String-based methods
-        String diff = UniDiffStatic.diff(original, revised,
+        String diff = JavaTextDiff.diff(original, revised,
                 "issue_189_insert_original.txt", "issue_189_insert_revised.txt", 10);
-        assertFalse(UniDiffStatic.identicalResult.equals(diff),
+        assertFalse(JavaTextDiff.identicalResult.equals(diff),
                 "diffStatic should produce non-empty diff for different files");
 
-        String patchedText = UniDiffStatic.patch(original, diff);
+        String patchedText = JavaTextDiff.patch(original, diff);
         String[] revLines = revised.split("\n", -1);
         String[] patchLines = patchedText.split("\n", -1);
         if (revLines.length > 0 && revLines[revLines.length - 1].isEmpty()) {
@@ -153,11 +153,11 @@ public class UniDiffFilesTest {
      * Verifies the round-trip: diffStatic → patchStatic reproduces the revised text.
      */
     private void verify(String origText, String revText, String originalFile, String revisedFile) {
-        String unifiedDiff = UniDiffStatic.diff(origText, revText, originalFile, revisedFile, 10);
+        String unifiedDiff = JavaTextDiff.diff(origText, revText, originalFile, revisedFile, 10);
 
         String patchedText;
         try {
-            patchedText = UniDiffStatic.patch(origText, unifiedDiff);
+            patchedText = JavaTextDiff.patch(origText, unifiedDiff);
         } catch (Exception e) {
             fail("patchStatic failed: " + e.getMessage());
             return;

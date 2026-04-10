@@ -1,7 +1,7 @@
 package org.unidiffstatic.examples;
 
 import org.junit.jupiter.api.Test;
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,13 +30,13 @@ public class ComputeDifference {
         String revised = fileToText(MOCK_FOLDER + "revised.txt");
 
         // Using String-based diffStatic — produces unified diff output
-        String diff = UniDiffStatic.diff(original, revised, "original.txt", "revised.txt", 3);
+        String diff = JavaTextDiff.diff(original, revised, "original.txt", "revised.txt", 3);
         System.out.println("=== Unified Diff (first 500 chars) ===");
         System.out.println(diff.substring(0, Math.min(500, diff.length())));
 
         // Verify round-trip
         try {
-            String patched = UniDiffStatic.patch(original, diff);
+            String patched = JavaTextDiff.patch(original, diff);
             String[] origLines = original.split("\n", -1);
             String[] revLines = revised.split("\n", -1);
             String[] patchLines = patched.split("\n", -1);
@@ -69,7 +69,7 @@ public class ComputeDifference {
         String original = fileToText(MOCK_FOLDER + "original.txt");
         String revised = fileToText(MOCK_FOLDER + "revised.txt");
 
-        String diff = UniDiffStatic.diff(original, revised, "original.txt", "revised.txt", 3);
+        String diff = JavaTextDiff.diff(original, revised, "original.txt", "revised.txt", 3);
         assertFalse(diff.isEmpty(), "Diff should be non-empty for different files");
         assertTrue(diff.contains("--- original.txt"));
         assertTrue(diff.contains("+++ revised.txt"));

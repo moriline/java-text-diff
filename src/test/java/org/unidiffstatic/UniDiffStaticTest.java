@@ -17,7 +17,7 @@ class UniDiffStaticTest {
                 three and some string
                 four
                 """;
-        String result = UniDiffStatic.diff(one, two);
+        String result = JavaTextDiff.diff(one, two);
 
         assertEquals("", result);
     }
@@ -27,7 +27,7 @@ class UniDiffStaticTest {
         String source = "line1\nline2\nline3";
         String target = "line1\nline2\nline3";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertEquals("", result);
     }
@@ -37,7 +37,7 @@ class UniDiffStaticTest {
         String source = "aaa\nccc";
         String target = "aaa\nbbb\nccc";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("+bbb"));
@@ -48,7 +48,7 @@ class UniDiffStaticTest {
         String source = "aaa\nbbb\nccc";
         String target = "aaa\nccc";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("-bbb"));
@@ -59,7 +59,7 @@ class UniDiffStaticTest {
         String source = "aaa\nbbb\nccc";
         String target = "aaa\nzzz\nccc";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("-bbb"));
@@ -71,7 +71,7 @@ class UniDiffStaticTest {
         String source = "The\ndog\nis\nbrown";
         String target = "The\nfox\nis\ndown";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("-dog"));
@@ -85,7 +85,7 @@ class UniDiffStaticTest {
         String source = "hello";
         String target = "world";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertTrue(result.startsWith("--- original\n+++ revised\n"));
         assertTrue(result.contains("@@"));
@@ -96,7 +96,7 @@ class UniDiffStaticTest {
         String source = "hello";
         String target = "world";
 
-        String result = UniDiffStatic.diff(source, target, "a/src.txt", "b/src.txt", 3);
+        String result = JavaTextDiff.diff(source, target, "a/src.txt", "b/src.txt", 3);
 
         assertTrue(result.startsWith("--- a/src.txt\n+++ b/src.txt\n"));
     }
@@ -106,7 +106,7 @@ class UniDiffStaticTest {
         String source = "line1\nline2\nline3\nline4\nline5";
         String target = "line1\nlineX\nline3\nline4\nline5";
 
-        String result = UniDiffStatic.diff(source, target, "a", "b", 1);
+        String result = JavaTextDiff.diff(source, target, "a", "b", 1);
 
         // Context lines should have space prefix
         assertTrue(result.contains(" line1"));
@@ -118,7 +118,7 @@ class UniDiffStaticTest {
         String source = "";
         String target = "hello\nworld";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("+hello"));
@@ -130,7 +130,7 @@ class UniDiffStaticTest {
         String source = "hello\nworld";
         String target = "";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("-hello"));
@@ -142,7 +142,7 @@ class UniDiffStaticTest {
         String source = "hello";
         String target = "world";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("-hello"));
@@ -154,7 +154,7 @@ class UniDiffStaticTest {
         String source = "a\nb";
         String target = "a\nc";
 
-        String result = UniDiffStatic.diff(source, target);
+        String result = JavaTextDiff.diff(source, target);
 
         assertTrue(result.endsWith("\n"));
     }
@@ -166,7 +166,7 @@ class UniDiffStaticTest {
         String source = "aaa;bbb;ccc";
         String target = "aaa;zzz;ccc";
 
-        String result = UniDiffStatic.diff(source, target, ";");
+        String result = JavaTextDiff.diff(source, target, ";");
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("-bbb"));
@@ -178,7 +178,7 @@ class UniDiffStaticTest {
         String source = "a;b;c;d;e";
         String target = "a;x;c;d;e";
 
-        String result = UniDiffStatic.diff(source, target, "a", "b", 1, ";");
+        String result = JavaTextDiff.diff(source, target, "a", "b", 1, ";");
 
         assertFalse(result.isEmpty());
         assertTrue(result.contains("-b"));
@@ -190,7 +190,7 @@ class UniDiffStaticTest {
         String source = "aaa;bbb;ccc";
         String target = "aaa;zzz;ccc";
 
-        String result = UniDiffStatic.diff(source, target, ";");
+        String result = JavaTextDiff.diff(source, target, ";");
 
         // diffStatic always produces unified diff with \n lines (standard format)
         // The delimiter is only used for splitting the input text

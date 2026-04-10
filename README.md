@@ -1,8 +1,8 @@
-# UniDiffStatic
+# JavaTextDiff
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/Java-25%2B-orange.svg)](https://www.oracle.com/java/)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.moriline/UniDiffStatic.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.moriline/UniDiffStatic)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.moriline/JavaTextDiff.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.moriline/JavaTextDiff)
 [![Build Status](https://img.shields.io/badge/Build-Gradle-green.svg)](https://gradle.org/)
 
 A **zero-dependency** Java library for computing text diffs and applying patches using the **Myers greedy difference algorithm**. Produces standard **unified diff** format output — the same format as `git diff` and `diff -u`.
@@ -26,7 +26,7 @@ A **zero-dependency** Java library for computing text diffs and applying patches
 
 ### Add to Your Project
 
-**Maven Central:** [io.github.moriline:UniDiffStatic:1.0.0](https://central.sonatype.com/artifact/io.github.moriline/UniDiffStatic) · [POM](https://repo1.maven.org/maven2/io/github/moriline/UniDiffStatic/1.0.0/UniDiffStatic-1.0.0.pom)
+**Maven Central:** [io.github.moriline:JavaTextDiff:1.0.0](https://central.sonatype.com/artifact/io.github.moriline/JavaTextDiff) · [POM](https://repo1.maven.org/maven2/io/github/moriline/JavaTextDiff/1.0.0/JavaTextDiff-1.0.0.pom)
 
 #### Gradle (Kotlin DSL)
 
@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.moriline:UniDiffStatic:1.0.0")
+    implementation("io.github.moriline:JavaTextDiff:1.0.0")
 }
 ```
 
@@ -48,7 +48,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.moriline:UniDiffStatic:1.0.0'
+    implementation 'io.github.moriline:JavaTextDiff:1.0.0'
 }
 ```
 
@@ -57,7 +57,7 @@ dependencies {
 ```xml
 <dependency>
     <groupId>io.github.moriline</groupId>
-    <artifactId>UniDiffStatic</artifactId>
+    <artifactId>JavaTextDiff</artifactId>
     <version>1.0.0</version>
 </dependency>
 ```
@@ -67,13 +67,13 @@ dependencies {
 #### Compute a Diff
 
 ```java
-import org.unidiffstatic.UniDiffStatic;
+import org.unidiffstatic.JavaTextDiff;
 
 String source = "hello\nworld";
 String target = "hello\nuniverse";
 
 // Generate unified diff
-String diff = UniDiffStatic.diff(source, target);
+String diff = JavaTextDiff.diff(source, target);
 
 System.out.println(diff);
 // --- source
@@ -91,7 +91,7 @@ String original = "hello\nworld";
 String diff = /* unified diff string */;
 
 // Apply the diff to get the revised text
-String result = UniDiffStatic.patch(original, diff);
+String result = JavaTextDiff.patch(original, diff);
 // result == "hello\nuniverse"
 ```
 
@@ -102,7 +102,7 @@ String revised = "hello\nuniverse";
 String diff = /* unified diff string */;
 
 // Restore the original text
-String original = UniDiffStatic.unpatch(revised, diff);
+String original = JavaTextDiff.unpatch(revised, diff);
 // original == "hello\nworld"
 ```
 
@@ -158,21 +158,21 @@ Inverse of `patch()` — restores the original text from the revised text and th
 String source = "hello|world";
 String target = "hello|universe";
 
-String diff = UniDiffStatic.diff(source, target, "|");
-String result = UniDiffStatic.patch(source, diff, "|");
+String diff = JavaTextDiff.diff(source, target, "|");
+String result = JavaTextDiff.patch(source, diff, "|");
 ```
 
 ### Custom Context Size
 
 ```java
 // 10 context lines instead of default 3
-String diff = UniDiffStatic.diff(source, target, "original.txt", "revised.txt", 10);
+String diff = JavaTextDiff.diff(source, target, "original.txt", "revised.txt", 10);
 ```
 
 ### Full Control
 
 ```java
-String diff = UniDiffStatic.diff(
+String diff = JavaTextDiff.diff(
     source,
     target,
     "a/file.txt",     // source name (shown in --- header)
@@ -188,7 +188,7 @@ The library is a **single-file implementation** (~630 lines) with no external de
 
 ```
 src/main/java/org/unidiffstatic/
-├── UniDiffStatic.java          # Core API + algorithm + unified diff writer
+├── JavaTextDiff.java             # Core API + algorithm + unified diff writer
 ├── algorithm/
 │   ├── MyersDiff.java          # Myers greedy difference algorithm
 │   ├── Change.java             # Represents a single change in the diff
@@ -242,8 +242,8 @@ The library guarantees that applying a diff and then reversing it will restore t
 String source = "original text";
 String target = "modified text";
 
-String diff = UniDiffStatic.diff(source, target);
-String patched = UniDiffStatic.patch(source, diff);
+String diff = JavaTextDiff.diff(source, target);
+String patched = JavaTextDiff.patch(source, diff);
 
 assert patched.equals(target) : "Round-trip failed";
 ```
