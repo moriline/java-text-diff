@@ -1,1 +1,1 @@
-rootProject.name = "UniDiffStatic"
+rootProject.name = "JavaTextDiff"
