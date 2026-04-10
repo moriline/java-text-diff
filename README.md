@@ -26,7 +26,7 @@ A **zero-dependency** Java library for computing text diffs and applying patches
 
 ### Add to Your Project
 
-**Maven Central:** [io.github.moriline:JavaTextDiff:1.0.0](https://central.sonatype.com/artifact/io.github.moriline/JavaTextDiff) · [POM](https://repo1.maven.org/maven2/io/github/moriline/JavaTextDiff/1.0.0/JavaTextDiff-1.0.0.pom)
+**Maven Central:** [io.github.moriline:JavaTextDiff:1.0.1](https://central.sonatype.com/artifact/io.github.moriline/JavaTextDiff) · [POM](https://repo1.maven.org/maven2/io/github/moriline/JavaTextDiff/1.0.1/JavaTextDiff-1.0.1.pom)
 
 #### Gradle (Kotlin DSL)
 
@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.github.moriline:JavaTextDiff:1.0.0")
+    implementation("io.github.moriline:JavaTextDiff:1.0.1")
 }
 ```
 
@@ -48,7 +48,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.moriline:JavaTextDiff:1.0.0'
+    implementation 'io.github.moriline:JavaTextDiff:1.0.1'
 }
 ```
 
@@ -58,7 +58,7 @@ dependencies {
 <dependency>
     <groupId>io.github.moriline</groupId>
     <artifactId>JavaTextDiff</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
